@@ -9,15 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.58.5",
-    "@react-three/fiber": "^8.12.0",
-    "framer-motion": "^10.9.4",
+    "@react-three/drei": "^9.121.5",
+    "@react-three/fiber": "^8.17.14",
+    "framer-motion": "^10.18.0",
     "maath": "^0.5.3",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "three": "^0.150.1",
-    "valtio": "^1.10.3"
+    "valtio": "^1.13.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

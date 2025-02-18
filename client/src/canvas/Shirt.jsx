@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { easing } from 'maath';
 import { useSnapshot } from 'valtio';
 import { useFrame } from '@react-three/fiber';
 import { Decal, useGLTF, useTexture } from '@react-three/drei';
+import * as THREE from 'three';
 
 import state from '../store';
 
@@ -13,7 +14,21 @@ const Shirt = () => {
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
 
-  useFrame((state, delta) => easing.dampC(materials.lambert1.color, snap.color, 0.25, delta));
+  // Set anisotropy after texture loading
+  React.useEffect(() => {
+    if (logoTexture) {
+      logoTexture.anisotropy = 16;
+      logoTexture.needsUpdate = true;
+    }
+    if (fullTexture) {
+      fullTexture.anisotropy = 16;
+      fullTexture.needsUpdate = true;
+    }
+  }, [logoTexture, fullTexture]);
+
+  useFrame((state, delta) => {
+    easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
+  });
 
   const stateString = JSON.stringify(snap);
 
@@ -41,7 +56,6 @@ const Shirt = () => {
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            map-anisotropy={16}
             depthTest={false}
             depthWrite={true}
           />
